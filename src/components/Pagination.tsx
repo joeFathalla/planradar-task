@@ -26,8 +26,8 @@ const Pagination: React.FC<PaginationProps> = ({
   });
 
   return (
-    <div className="flex flex-row justify-between items-center gap-4 mb-4 w-full flex-wrap">
-      <div className="flex items-center gap-2">
+    <div className="flex flex-row justify-between items-center md:gap-4 mb-4 w-full flex-wrap">
+      <div className="flex items-center gap-2 w-[40%] md:w-auto">
         {/* show the pagiantion
                   it consists of next and previous buttons
                   along with page numbers, in our case, 5 page
@@ -35,13 +35,13 @@ const Pagination: React.FC<PaginationProps> = ({
         {/* previous button */}
         <button
           onClick={() => onPageChange(currentPage - 1)}
-          className="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:text-gray-200 hover:bg-[#171b5a] disabled:opacity-50"
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:text-gray-200 hover:bg-[#171b5a] disabled:opacity-50 w-1/2 md:w-auto text-[2vw] md:text-base"
           disabled={currentPage === 1}
         >
           Previous
         </button>
         {/* show paginated button group */}
-        <div className="hidden md:block">
+        <div className="hidden md:flex gap-2">
           {paginationRange?.map((item, index) => {
             if (item === DOTS) {
               return (
@@ -70,15 +70,15 @@ const Pagination: React.FC<PaginationProps> = ({
         {/* next button */}
         <button
           onClick={() => onPageChange(currentPage + 1)}
-          className="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:text-gray-200 hover:bg-[#171b5a] disabled:opacity-50"
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:text-gray-200 hover:bg-[#171b5a] disabled:opacity-50 w-1/2 md:w-auto text-[2vw] md:text-base"
           disabled={currentPage === totalPages}
         >
           Next
         </button>
       </div>
-      <div className="flex items-center gap-2">
-        <div>
-          <label className="text-gray-600 text-xs md:text-base">
+      <div className="flex items-center md:gap-2 w-[40%] md:w-[30%] flex-row-reverse">
+        <div className="w-full md:w-auto text-right md:text-left">
+          <label className="text-gray-600 text-[2vw] md:text-base">
             Rows Per Page:
             <select
               value={rowsPerPage}

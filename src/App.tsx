@@ -45,7 +45,7 @@ const App: React.FC = () => {
         <div className="h-8 mb-2 md:mb-4">
           <h1 className="text-3xl font-bold ">Ticket List</h1>
         </div>
-        <div className="h-[calc(100%-100px)] mb-5 w-full">
+        <div className="h-[calc(100%-120px)] mb-5 w-full">
           <h3 className="mb-2 text-sm">
             Table list with pagination to custom render fixed amount per page
           </h3>

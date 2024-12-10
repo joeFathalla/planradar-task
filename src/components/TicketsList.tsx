@@ -51,31 +51,31 @@ const TicketsList = ({
                   style={{ height: `${rowHeight}px` }}
                 >
                   <td
-                    className="p-0 border border-gray-300 text-center"
+                    className="px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.id}
                   </td>
                   <td
-                    className="p-0 border border-gray-300 text-center"
+                    className="px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.subject}
                   </td>
                   <td
-                    className="p-0 border border-gray-300 text-center"
+                    className="px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.priority}
                   </td>
                   <td
-                    className="px-0 border border-gray-300 text-center"
+                    className="px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.status}
                   </td>
                   <td
-                    className="px-4 py-0 border border-gray-300 text-left"
+                    className="px-4 py-0 text-xs md:text-base border border-gray-300 text-left"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.description}

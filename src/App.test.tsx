@@ -6,7 +6,7 @@ describe("App Component", () => {
   test("renders tickets for the first time", () => {
     render(<App />);
     expect(
-      screen.queryByText("Unauthorized access attempt detected")
-    ).toBeInTheDocument();
+      screen.getAllByText("Unauthorized access attempt detected").length
+    ).toBeGreaterThan(0);
   });
 });

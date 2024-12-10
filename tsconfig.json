@@ -9,6 +9,7 @@
       "esModuleInterop": true,
       "skipLibCheck": true
   },
+  "exclude": ["node_modules", "dist", "**/*.test.tsx", "**/*.test.ts", "jest.setup.ts"],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }

@@ -1,113 +1,101 @@
-import { usePaginationRange, DOTS } from "../hooks/usePaginationRange";
-type NextPrevCallback = () => void;
-type ChangePageCallback = (page: number) => void;
+import { usePagination } from "../hooks/usePagination";
+const DOTS = "...";
 
-const Pagination = ({
-  totalPageCount,
-  currentPage,
-  changePage,
-  goToNextPage,
-  gotToPreviousPage,
-}: {
-  totalPageCount: number;
+interface PaginationProps {
+  totalPages: number;
   currentPage: number;
-  changePage: ChangePageCallback;
-  goToNextPage: NextPrevCallback;
-  gotToPreviousPage: NextPrevCallback;
+  siblingCount: number;
+  rowsPerPage: number;
+  onPageChange: (page: number) => void;
+  onRowsPerPageChange: (rows: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({
+  totalPages,
+  currentPage,
+  siblingCount,
+  rowsPerPage,
+  onPageChange,
+  onRowsPerPageChange,
 }) => {
-  const paginationRange = usePaginationRange({
-    totalPageCount: totalPageCount,
+  const paginationRange = usePagination({
+    totalPages: totalPages,
     currentPage,
+    siblingCount,
   });
 
   return (
-    <div className="flex justify-center items-center w-full">
-      {/* show the pagiantion
+    <div className="flex flex-row justify-between items-center gap-4 mb-4 w-full flex-wrap">
+      <div className="flex items-center gap-2">
+        {/* show the pagiantion
                   it consists of next and previous buttons
                   along with page numbers, in our case, 5 page
                   numbers at a time */}
-      {/* previous button */}
-      <button
-        onClick={gotToPreviousPage}
-        className={`border-2 border-blue-900 border-solid   flex-1 h-10 m-0 flex justify-end items-center  ${
-          currentPage === 1
-            ? "pointer-events-none border-none bg-gray-800 text-[#ccc]"
-            : "bg-white text-blue-700 hover:bg-blue-900 hover:text-white "
-        }`}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          className="h-8 w-8"
+        {/* previous button */}
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:text-gray-200 hover:bg-[#171b5a] disabled:opacity-50"
+          disabled={currentPage === 1}
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 19.5 8.25 12l7.5-7.5"
-          />
-        </svg>
-
-        <span className="hidden md:block m-auto">Previous</span>
-      </button>
-      {/* show paginated button group */}
-      {paginationRange &&
-        paginationRange.map((item, index) => {
-          if (item === DOTS) {
-            return (
-              <div
-                key={index}
-                className="bg-white border-2 border-blue-900 border-solid px-2 py-4 round-md h-10 w-10 relative mx-0 my-1 flex-1 cursor-not-allowed "
-              >
-                <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
-                  &#8230;
+          Previous
+        </button>
+        {/* show paginated button group */}
+        <div className="hidden md:block">
+          {paginationRange?.map((item, index) => {
+            if (item === DOTS) {
+              return (
+                <span key={index} className="px-3 py-2 text-gray-400">
+                  ...
                 </span>
-              </div>
-            );
-          }
-          return (
-            <button
-              key={index}
-              onClick={() => changePage(parseInt(item.toString()))}
-              className={` border-2 border-blue-900 border-solid px-2 py-4 round-md h-10 w-16 relative mx-0 my-1 cursor-pointer flex-1 ${
-                currentPage === item
-                  ? "border-none bg-blue-900 text-white pointer-events-none"
-                  : "bg-white hover:bg-blue-900 hover:text-white"
-              }`}
-            >
-              <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
+              );
+            }
+            return (
+              <button
+                key={index}
+                onClick={() => onPageChange(Number(item))}
+                className={`px-4 py-2 rounded ${
+                  currentPage === item
+                    ? "bg-[#171b5a] text-white"
+                    : "bg-blue-900 text-gray-200 hover:bg-[#171b5a]"
+                }`}
+              >
+                {/* <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] "> */}
                 {item}
-              </span>
-            </button>
-          );
-        })}
-      {/* next button */}
-      <button
-        onClick={goToNextPage}
-        className={`  border-2 border-blue-900 border-solid  flex flex-1 h-10 m-0 cursor-pointer justify-end items-center  ${
-          currentPage === totalPageCount
-            ? "pointer-events-none border-none bg-gray-800 text-[#ccc]"
-            : "bg-white text-blue-700 hover:bg-blue-900 hover:text-white"
-        }`}
-      >
-        <span className="hidden md:block m-auto">next</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          className="h-8 w-8  "
+                {/* </span> */}
+              </button>
+            );
+          })}
+        </div>
+        {/* next button */}
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:text-gray-200 hover:bg-[#171b5a] disabled:opacity-50"
+          disabled={currentPage === totalPages}
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m8.25 4.5 7.5 7.5-7.5 7.5"
-          />
-        </svg>
-      </button>
+          Next
+        </button>
+      </div>
+      <div className="flex items-center gap-2">
+        <div>
+          <label className="text-gray-600 text-xs md:text-base">
+            Rows Per Page:
+            <select
+              value={rowsPerPage}
+              onChange={(e) => onRowsPerPageChange(Number(e.target.value))}
+              className="ml-2 p-2 border border-gray-300 rounded"
+            >
+              {[100, 200, 500, 1000].map((value) => (
+                <option key={value} value={value}>
+                  {value}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <div className="hidden lg:block">
+          <span>{`Page ${currentPage} of ${totalPages} Pages`}</span>
+        </div>
+      </div>
     </div>
   );
 };

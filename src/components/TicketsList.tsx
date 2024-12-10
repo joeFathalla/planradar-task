@@ -26,9 +26,9 @@ const TicketsList = ({
   return (
     <div
       ref={containerRef}
-      className="overflow-y-auto flex-1 border-1 border-solid border-[#ccc] mb-2"
+      className="w-full h-[calc(100%-50px)] overflow-y-auto flex-1 border-1 border-solid border-[#ccc] mb-2 shadow-[0 1px 20px 0 rgba(0, 0, 0, 0.1)] rounded-xl"
     >
-      <table className="table-auto w-full border-collapse border border-gray-300">
+      <table className="table-auto w-full border-collapse border border-gray-300 text-xs md:text-base bg-white">
         <thead className="sticky -top-1 bg-blue-900 text-white font-bold">
           <tr>
             <th className="p-2 border border-gray-300">Id</th>
@@ -46,7 +46,7 @@ const TicketsList = ({
             : tickets.map((ticket) => (
                 <tr
                   key={ticket.id}
-                  className="hover:bg-gray-100 even:bg-gray-50 text-center"
+                  className="hover:bg-gray-100 even:bg-gray-50 text-center "
                   style={{ height: `${rowHeight}px` }}
                 >
                   <td
@@ -68,13 +68,13 @@ const TicketsList = ({
                     {ticket.priority}
                   </td>
                   <td
-                    className="p-0 border border-gray-300 text-center"
+                    className="px-0 border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.status}
                   </td>
                   <td
-                    className="p-0 border border-gray-300 text-left"
+                    className="px-4 py-0 border border-gray-300 text-left"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.description}

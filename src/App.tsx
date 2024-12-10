@@ -4,14 +4,11 @@ import { TICKETSDATA } from "./data/TicketsData";
 import TicketsList from "./components/TicketsList";
 import Pagination from "./components/Pagination";
 const tickets = TICKETSDATA;
-const ticketsPerPage = 100;
+// const ticketsPerPage = 100;
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [totalPageCount] = useState(Math.ceil(tickets.length / ticketsPerPage));
   const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastTicket = currentPage * ticketsPerPage;
-  const indexOfFirstTicket = indexOfLastTicket - ticketsPerPage;
-  const currentTickets = tickets.slice(indexOfFirstTicket, indexOfLastTicket);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
 
   useEffect(() => {
     let timeout: number;
@@ -23,16 +20,17 @@ const App: React.FC = () => {
     return () => clearTimeout(timeout); // clear the timeout
   }, [isLoading]);
 
-  const changePage = (pageNumber: number) => {
-    setIsLoading(true);
-    setCurrentPage(pageNumber);
+  const changePage = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setIsLoading(true);
+      setCurrentPage(page);
+    }
   };
 
-  const goToNextPage = () => {
-    setCurrentPage((page) => page + 1);
-  };
-  const gotToPreviousPage = () => {
-    setCurrentPage((page) => page - 1);
+  const handleRowsPerPageChange = (rows: number) => {
+    setRowsPerPage(rows);
+    setIsLoading(true);
+    setCurrentPage(1); // Reset to the first page
   };
 
   useEffect(() => {
@@ -42,23 +40,41 @@ const App: React.FC = () => {
     });
   }, [currentPage]);
 
+  const totalPages = Math.ceil(tickets.length / rowsPerPage);
+  const currentTickets = tickets.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
   return (
-    <div className="p-4 flex flex-col h-[100dvh]">
-      <h1 className="text-xl font-bold mb-4 text-center">Ticket List</h1>
-      <TicketsList
-        tickets={currentTickets}
-        rowHeight={30}
-        perPage={ticketsPerPage}
-        loading={isLoading}
-      />
-      <Pagination
-        totalPageCount={totalPageCount}
-        currentPage={currentPage}
-        changePage={changePage}
-        goToNextPage={goToNextPage}
-        gotToPreviousPage={gotToPreviousPage}
-      />
-    </div>
+    <main className="bg-[#ccc]">
+      <div className="px-4 md:p-4 max-w-7xl mx-auto flex flex-col h-[100dvh] justify-between ">
+        <div className="h-8 mb-2 md:mb-4">
+          <h1 className="text-xl font-bold ">Ticket List</h1>
+        </div>
+        <div className="h-[calc(100%-100px)] mb-5 w-full">
+          <h3 className="mb-2 text-sm">
+            Table list with pagination to custom render fixed amount per page
+          </h3>
+          <TicketsList
+            tickets={currentTickets}
+            rowHeight={50}
+            perPage={rowsPerPage}
+            loading={isLoading}
+          />
+        </div>
+        <div className="h-12">
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            siblingCount={1}
+            rowsPerPage={rowsPerPage}
+            onPageChange={changePage}
+            onRowsPerPageChange={handleRowsPerPageChange}
+          />
+        </div>
+      </div>
+    </main>
   );
 };
 

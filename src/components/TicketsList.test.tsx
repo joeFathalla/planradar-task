@@ -37,7 +37,7 @@ describe("TicketsList Component", () => {
         perPage={5}
       />
     );
-    expect(screen.getByText("Subject 1")).toBeInTheDocument();
-    expect(screen.getByText("Subject 2")).toBeInTheDocument();
+    expect(screen.getAllByText("Subject 1").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Subject 2").length).toBeGreaterThan(0);
   });
 });

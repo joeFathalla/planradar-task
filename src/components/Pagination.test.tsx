@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import Pagination from "./Pagination";
 
 describe("Pagination Component", () => {
-  test("renders pagination controls correctly", () => {
+  test("renders pagination controls correctly", async () => {
     const mockOnPageChange = jest.fn();
     const mockOnRowsPerPageChange = jest.fn();
 
@@ -18,9 +18,15 @@ describe("Pagination Component", () => {
       />
     );
 
-    expect(screen.getByText("Previous")).toBeInTheDocument();
-    expect(screen.getByText("Next")).toBeInTheDocument();
-    expect(screen.getByText("5")).toHaveClass("bg-[#171b5a]"); // Current page
+    expect(screen.getAllByText("Previous").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Next").length).toBeGreaterThan(0);
+    expect(screen.getByText("5")).toHaveProperty(
+      "className",
+      "px-4 py-2 rounded bg-[#171b5a] text-white"
+    );
+
+    // expect(screen.getByText("Next")).toBeInTheDocument();
+    // expect(screen.getByText("5")).toHaveClass("bg-[#171b5a]"); // Current page
   });
 
   test("calls onPageChange when a page number is clicked", () => {

@@ -2,13 +2,8 @@
   "files": [],
   "compilerOptions": {
     "types": ["node","jest", "@testing-library/jest-dom"],
-      "target": "ES6",
-      "module": "CommonJS",
-      "jsx": "react",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true
-  },
+    "esModuleInterop":true
+     },
   "exclude": ["node_modules", "dist", "**/*.test.tsx", "**/*.test.ts", "jest.setup.ts"],
   "references": [
     { "path": "./tsconfig.app.json" },

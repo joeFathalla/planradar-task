@@ -29,7 +29,7 @@ const TicketsList = ({
       ref={containerRef}
       className="w-full h-[calc(100%-50px)] overflow-y-auto flex-1 border-1 border-solid border-[#ccc] mb-2 shadow-[0 1px 20px 0 rgba(0, 0, 0, 0.1)] rounded-xl"
     >
-      <table className="table-auto w-full border-collapse border border-gray-300 text-xs md:text-base bg-white">
+      <table className="table-auto w-full border-collapse border border-gray-300 text-[2vw] md:text-base bg-white">
         <thead className="sticky -top-1 bg-blue-900 text-white font-bold">
           <tr>
             <th className="p-2 border border-gray-300">Id</th>
@@ -51,31 +51,31 @@ const TicketsList = ({
                   style={{ height: `${rowHeight}px` }}
                 >
                   <td
-                    className="lg:px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
+                    className="lg:px-4 py-0 text-[2vw] md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.id}
                   </td>
                   <td
-                    className="lg:px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
+                    className="lg:px-4 py-0 text-[2vw] md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.subject}
                   </td>
                   <td
-                    className="lg:px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
+                    className="lg:px-4 py-0 text-[2vw] md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.priority}
                   </td>
                   <td
-                    className="lg:px-4 py-0 text-xs md:text-base border border-gray-300 text-center"
+                    className="lg:px-4 py-0 text-[2vw] md:text-base border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.status}
                   </td>
                   <td
-                    className="px-4 py-0 text-xs md:text-base border border-gray-300 text-left"
+                    className="px-4 py-0 text-[2vw] md:text-base border border-gray-300 text-left"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.description}

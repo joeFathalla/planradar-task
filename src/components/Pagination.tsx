@@ -30,7 +30,7 @@ const Pagination = ({
         {/* previous button */}
         <button
           onClick={gotToPreviousPage}
-          className={` bg-white hover:bg-blue-900 hover:text-white border-2 border-[#666] border-solid text-blue-700 flex w-32 h-10 mx-0 my-4 cursor-pointer justify-start items-center ${
+          className={` bg-white border-2 border-[#666] border-solid  text-blue-700 flex w-32 h-10 m-0 cursor-pointer justify-end items-center hover:bg-blue-900 hover:text-white ${
             currentPage === 1
               ? "pointer-events-none border-none bg-gray-800 text-[#ccc]"
               : ""
@@ -70,10 +70,10 @@ const Pagination = ({
               <button
                 key={index}
                 onClick={() => changePage(parseInt(item.toString()))}
-                className={`bg-white border-2 border-[#666] border-solid px-2 py-4 round-md h-10 w-16 relative mx-0 my-1 cursor-pointer hover:bg-blue-900 hover:text-white ${
+                className={` border-2 border-[#666] border-solid px-2 py-4 round-md h-10 w-16 relative mx-0 my-1 cursor-pointer  ${
                   currentPage === item
                     ? "border-none bg-blue-900 text-white pointer-events-none"
-                    : null
+                    : "bg-white hover:bg-blue-900 hover:text-white"
                 }`}
               >
                 <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ">

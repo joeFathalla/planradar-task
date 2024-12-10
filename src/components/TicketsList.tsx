@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+// import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Ticket } from "../data/TicketsType";
 import SkeletonRow from "./Skeleton";
 

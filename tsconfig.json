@@ -3,7 +3,7 @@
   "compilerOptions": {
     "types": ["node","jest", "@testing-library/jest-dom"],
     "esModuleInterop":true
-     },
+  },
   "exclude": ["node_modules", "dist", "**/*.test.tsx", "**/*.test.ts", "jest.setup.ts"],
   "references": [
     { "path": "./tsconfig.app.json" },

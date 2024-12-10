@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Ticket } from "../data/TicketsType";
 import SkeletonRow from "./Skeleton";
 
@@ -15,7 +15,7 @@ const TicketsList = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (containerRef.current) {
+    if (containerRef.current && containerRef.current.scrollTo) {
       containerRef.current.scrollTo({
         behavior: "smooth",
         top: 0,

@@ -1,3 +1,4 @@
+import React from "react";
 import { usePagination } from "../hooks/usePagination";
 const DOTS = "...";
 

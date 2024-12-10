@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const [rowsPerPage, setRowsPerPage] = useState(100);
 
   useEffect(() => {
-    let timeout: number;
+    let timeout: NodeJS.Timeout;
     if (isLoading) {
       timeout = setTimeout(() => {
         setIsLoading(false);
@@ -32,13 +32,6 @@ const App: React.FC = () => {
     setIsLoading(true);
     setCurrentPage(1); // Reset to the first page
   };
-
-  useEffect(() => {
-    window.scrollTo({
-      behavior: "smooth",
-      top: 0,
-    });
-  }, [currentPage]);
 
   const totalPages = Math.ceil(tickets.length / rowsPerPage);
   const currentTickets = tickets.slice(

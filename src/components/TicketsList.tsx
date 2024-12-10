@@ -1,4 +1,6 @@
+import { useEffect, useRef } from "react";
 import { Ticket } from "../data/TicketsType";
+import SkeletonRow from "./Skeleton";
 
 const TicketsList = ({
   tickets,
@@ -11,8 +13,19 @@ const TicketsList = ({
   perPage: number;
   loading: boolean;
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        behavior: "smooth",
+        top: 0,
+      });
+    }
+  }, [tickets]);
+
   return (
     <div
+      ref={containerRef}
       style={{
         overflowY: "auto",
         height: rowHeight * perPage,
@@ -30,54 +43,48 @@ const TicketsList = ({
           </tr>
         </thead>
         <tbody>
-          {loading ? (
-            <tr>
-              <td>loading</td>
-              <td>loading</td>
-              <td>loading</td>
-              <td>loading</td>
-              <td>loading</td>
-            </tr>
-          ) : (
-            tickets.map((ticket) => (
-              <tr
-                key={ticket.id}
-                className="hover:bg-gray-100 even:bg-gray-50 text-xs"
-                style={{ height: `${rowHeight}px` }}
-              >
-                <td
-                  className="p-0 border border-gray-300"
+          {loading
+            ? Array.from({ length: perPage }).map((_, index) => (
+                <SkeletonRow key={index} />
+              ))
+            : tickets.map((ticket) => (
+                <tr
+                  key={ticket.id}
+                  className="hover:bg-gray-100 even:bg-gray-50 text-xs"
                   style={{ height: `${rowHeight}px` }}
                 >
-                  {ticket.id}
-                </td>
-                <td
-                  className="p-0 border border-gray-300"
-                  style={{ height: `${rowHeight}px` }}
-                >
-                  {ticket.subject}
-                </td>
-                <td
-                  className="p-0 border border-gray-300"
-                  style={{ height: `${rowHeight}px` }}
-                >
-                  {ticket.priority}
-                </td>
-                <td
-                  className="p-0 border border-gray-300"
-                  style={{ height: `${rowHeight}px` }}
-                >
-                  {ticket.status}
-                </td>
-                <td
-                  className="p-0 border border-gray-300"
-                  style={{ height: `${rowHeight}px` }}
-                >
-                  {ticket.description}
-                </td>
-              </tr>
-            ))
-          )}
+                  <td
+                    className="p-0 border border-gray-300"
+                    style={{ height: `${rowHeight}px` }}
+                  >
+                    {ticket.id}
+                  </td>
+                  <td
+                    className="p-0 border border-gray-300"
+                    style={{ height: `${rowHeight}px` }}
+                  >
+                    {ticket.subject}
+                  </td>
+                  <td
+                    className="p-0 border border-gray-300"
+                    style={{ height: `${rowHeight}px` }}
+                  >
+                    {ticket.priority}
+                  </td>
+                  <td
+                    className="p-0 border border-gray-300"
+                    style={{ height: `${rowHeight}px` }}
+                  >
+                    {ticket.status}
+                  </td>
+                  <td
+                    className="p-0 border border-gray-300"
+                    style={{ height: `${rowHeight}px` }}
+                  >
+                    {ticket.description}
+                  </td>
+                </tr>
+              ))}
         </tbody>
       </table>
     </div>

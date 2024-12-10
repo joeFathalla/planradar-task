@@ -14,11 +14,11 @@ const App: React.FC = () => {
   const currentTickets = tickets.slice(indexOfFirstTicket, indexOfLastTicket);
 
   useEffect(() => {
-    let timeout: number | undefined;
+    let timeout: number;
     if (isLoading) {
       timeout = setTimeout(() => {
         setIsLoading(false);
-      }, 3000);
+      }, 1000);
     }
     return () => clearTimeout(timeout); // clear the timeout
   }, [isLoading]);
@@ -43,11 +43,11 @@ const App: React.FC = () => {
   }, [currentPage]);
 
   return (
-    <div className="p-4">
+    <div className="p-4 flex flex-col h-[100dvh]">
       <h1 className="text-xl font-bold mb-4 text-center">Ticket List</h1>
       <TicketsList
         tickets={currentTickets}
-        rowHeight={10}
+        rowHeight={30}
         perPage={ticketsPerPage}
         loading={isLoading}
       />

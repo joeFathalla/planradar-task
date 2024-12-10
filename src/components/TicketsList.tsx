@@ -26,14 +26,10 @@ const TicketsList = ({
   return (
     <div
       ref={containerRef}
-      style={{
-        overflowY: "auto",
-        height: rowHeight * perPage,
-        border: "1px solid #ccc",
-      }}
+      className="overflow-y-auto flex-1 border-1 border-solid border-[#ccc] mb-2"
     >
       <table className="table-auto w-full border-collapse border border-gray-300">
-        <thead className="sticky top-0 bg-gray-200">
+        <thead className="sticky -top-1 bg-blue-900 text-white font-bold">
           <tr>
             <th className="p-2 border border-gray-300">Id</th>
             <th className="p-2 border border-gray-300">Subject</th>
@@ -50,35 +46,35 @@ const TicketsList = ({
             : tickets.map((ticket) => (
                 <tr
                   key={ticket.id}
-                  className="hover:bg-gray-100 even:bg-gray-50 text-xs"
+                  className="hover:bg-gray-100 even:bg-gray-50 text-center"
                   style={{ height: `${rowHeight}px` }}
                 >
                   <td
-                    className="p-0 border border-gray-300"
+                    className="p-0 border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.id}
                   </td>
                   <td
-                    className="p-0 border border-gray-300"
+                    className="p-0 border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.subject}
                   </td>
                   <td
-                    className="p-0 border border-gray-300"
+                    className="p-0 border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.priority}
                   </td>
                   <td
-                    className="p-0 border border-gray-300"
+                    className="p-0 border border-gray-300 text-center"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.status}
                   </td>
                   <td
-                    className="p-0 border border-gray-300"
+                    className="p-0 border border-gray-300 text-left"
                     style={{ height: `${rowHeight}px` }}
                   >
                     {ticket.description}
